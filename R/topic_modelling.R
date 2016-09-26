@@ -3,6 +3,9 @@
 #'
 #' @param df A dataframe of papers
 #' @return A corpus of words, punct removed and stemmed
+#' @export
+#' @import tm
+#' @import dplyr
 corporate <- function(df,col="AB") {
 
   ignoreWords <- c("the","however","this","and")
@@ -24,6 +27,10 @@ corporate <- function(df,col="AB") {
 #'
 #' @param df A dataframe of papers
 #' @return A corpus of words, punct removed and stemmed
+#' @export
+#' @import tm
+#' @import dplyr
+#' @import slam
 makeDTM <- function(corpus,sparsity,rnames,cols,rows) {
   dtm <- tm::DocumentTermMatrix( # make a document term matrix
     corpus,
@@ -64,6 +71,9 @@ makeDTM <- function(corpus,sparsity,rnames,cols,rows) {
 #'
 #' @param dtm a document term matrix
 #' @return A corpus of words that reflect the terms in the dtm
+#' @export
+#' @import tm
+#'
 refresh_corp <- function(dtm) {
   dtm2list <- apply(dtm, 1, function(x) {
     paste(rep(names(x), x), collapse=" ")
@@ -71,4 +81,23 @@ refresh_corp <- function(dtm) {
   ## convert back to a Corpus
   corp <- VCorpus(VectorSource(dtm2list))
   return(corp)
+}
+
+
+#####################################################################
+#' visualise the topic model
+#'
+#' @param model a topic model
+#' @param corpus a corpus
+#' @dtm a document term matrix
+#'
+#' @export
+#'
+#'
+visualise <- function(model,corpus,dtm) {
+  json <- topicmodels_json_ldavis(model,corpus,dtm)
+  modelName <- deparse(substitute(model))
+  unlink(modelName, recursive=TRUE)
+  serVis(json, out.dir = modelName, open.browser = F)
+  save(model,file=paste0(modelName,"/model_output.RData"))
 }
