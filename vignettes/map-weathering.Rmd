@@ -23,8 +23,21 @@ path = system.file("results.txt",package="scimetrix")
 Use the `readWoS` function to read in a text file downloaded from Web of Science, and apply the `mergeOECD` function to add OECD subject categories
 ```{r warning=FALSE}
 papers <- readWoS(path) %>%
-  mergeOECD()
+  mergeOECD() 
+
 head(papers)
+```
+
+
+The `paperNumbers` function plots numbers of papers by year and another variable
+```{r warning=FALSE}
+paperNumbers(papers,"OECD",bSize=6)
+```
+
+`paperShares` works the same way but with shares instead of absolute numbers
+```{r warning=FALSE}
+paperShares(papers,"OECD",bSize=6)
+paperShares(papers,"OECD",bSize=6,pType="line")
 ```
 
 ## Preparing data for topic modelling
