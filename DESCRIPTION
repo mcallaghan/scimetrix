@@ -3,7 +3,7 @@ Type: Package
 Title: Some Scientometric and Topic Modelling tools
 Version: 0.1.0
 Authors@R: person("Max", "Callaghan", email = "callaghan@mcc-berlin.net", role = c("aut", "cre"))
-Description: Reads Wos, data. Some quick wrappers to shorten processes for doing
+Description: Reads WoS, data. Some quick wrappers to shorten processes for doing
     topic modelling. Some graphs.
 License: What license is it under?
 LazyData: TRUE
@@ -17,3 +17,6 @@ Imports:
     topicmodels,
     slam
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

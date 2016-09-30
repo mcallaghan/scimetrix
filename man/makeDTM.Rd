@@ -7,7 +7,11 @@
 makeDTM(corpus, sparsity, rnames, cols, rows)
 }
 \arguments{
-\item{df}{A dataframe of papers}
+\item{corpus}{- A document corpus}
+
+\item{sparsity}{- An integer between 0 and 1. Lower values remove more highly common and highly uncommon terms}
+
+\item{rnames}{- a vector of document identifiers (usually papers$UT)}
 }
 \value{
 A corpus of words, punct removed and stemmed

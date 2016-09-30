@@ -1,9 +1,13 @@
+
 #####################################################################
 #' Apply OECD categories to web of science subject area
 #'
 #' @param df A dataframe of papers
 #' @return A dataframe of WoS records with OECD fields
+#' @export
+#' @import dplyr
 mergeOECD <- function(df) {
+  #requireNamespace("dplyr")
   df <- df %>%
     dplyr::mutate(WC = as.character(WC)) %>%
     dplyr::mutate(WC = gsub("GREEN & SUSTAINABLE SCIENCE & TECHNOLOGY; ","",WC)) %>%
@@ -25,10 +29,11 @@ mergeOECD <- function(df) {
 #'
 #' @param p A path to a WoS file or directory of WoS files
 #' @return A dataframe of WoS records
+#' @export
+#' @import assertthat
+#' @import parallel
+#' @import dplyr
 readWoS <- function(p) {
-  require(assertthat)
-  require(dplyr)
-  require(parallel)
   # Calculate the number of cores
   no_cores <- detectCores() - 1
 
@@ -81,24 +86,4 @@ readWoS <- function(p) {
   fsdf$EF <- NULL
   fsdf$PY <- as.numeric(fsdf$PY)
   return(fsdf)
-}
-
-WoSCitations <- function(p) {
-  require(assertthat)
-  require(dplyr)
-  if(assertthat::is.dir(p)) {
-    files <- list.files(p,pattern=".txt",full.names=T)
-    d <- T
-  } else {
-    files <- p
-    d <- F
-  }
-  pattern <- "(\n[A-Z]{2})"
-  splitr <- function(x) {
-    f <- substr(x,1,2)
-    data <- substring(x,4)
-    x <- list()
-    x[f] <- data
-    return(x)
-  }
 }

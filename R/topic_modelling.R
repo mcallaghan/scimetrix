@@ -25,7 +25,9 @@ corporate <- function(df,col="AB") {
 #####################################################################
 #' Turn a corpus into a document term matrix
 #'
-#' @param df A dataframe of papers
+#' @param corpus - A document corpus
+#' @param sparsity - An integer between 0 and 1. Lower values remove more highly common and highly uncommon terms
+#' @param rnames - a vector of document identifiers (usually papers$UT)
 #' @return A corpus of words, punct removed and stemmed
 #' @export
 #' @import tm
@@ -89,11 +91,8 @@ refresh_corp <- function(dtm) {
 #'
 #' @param model a topic model
 #' @param corpus a corpus
-#' @dtm a document term matrix
-#'
+#' @param dtm a document term matrix
 #' @export
-#'
-#'
 visualise <- function(model,corpus,dtm) {
   json <- topicmodels_json_ldavis(model,corpus,dtm)
   modelName <- deparse(substitute(model))

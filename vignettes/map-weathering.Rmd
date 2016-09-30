@@ -1,0 +1,79 @@
+---
+title: "Reading and Topic modelling enhanced weathering"
+author: "Max"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Reading data from WoS
+
+```{r, echo=FALSE,message=FALSE}
+library(dplyr)
+library(scimetrix)
+library(tm)
+library(topicmodels)
+library(ggplot2)
+path = system.file("results.txt",package="scimetrix")
+```
+
+Use the `readWoS` function to read in a text file downloaded from Web of Science, and apply the `mergeOECD` function to add OECD subject categories
+```{r warning=FALSE}
+papers <- readWoS(path) %>%
+  mergeOECD()
+head(papers)
+```
+
+## Preparing data for topic modelling
+
+Turn a field of your dataframe (defaults to AB, abstract) into a corpus of documents
+```{r warning=FALSE}
+corpus <- corporate(papers)
+```
+
+Turn this into a document term matrix with a sparsity of 0.5 (this is a very low number, for illustration)
+```{r warning=FALSE}
+dtm <- makeDTM(corpus,0.5,papers$UT,0.05,0)
+```
+
+The above process removes some documents (a list of paper UTs is returned as $removed). In future operations, we will only want to use documents that were not removed
+```{r warning=FALSE}
+rem <- filter(papers,UT %in% dtm$removed)
+papers_used <- subset(papers, !(UT %in% dtm$removed))
+```
+
+Re-create a corpus based on the words and documents used after the filtering steps above
+```{r warning=FALSE}
+corpus_used <- refresh_corp(dtm$dtm)
+```
+
+
+## Topic modelling
+What's the optimal number (up to a maximum of 10) of topics?
+```{r warning=FALSE}
+optimal_k(dtm$dtm, 10)
+```
+
+
+Run a topic model on the dtm, with k topics (smaller k = less computation time).
+```{r warning=FALSE}
+SEED <- 2016
+
+system.time({
+  CTM_3 = CTM(dtm$dtm,k=3,method="VEM",
+               control=list(seed=SEED))
+})
+
+```
+
+
+create a folder where we save a visualisation of the model, and the model data
+```{r warning=FALSE, message=FALSE,results="hide"}
+visualise(CTM_3,corpus_used,dtm$dtm)
+```
+
+
+
