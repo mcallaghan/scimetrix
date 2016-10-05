@@ -4,12 +4,7 @@
 \alias{plot.optimal_k1}
 \title{Plots a plot.optimal_k1 Object}
 \usage{
-\method{plot}{plot.optimal_k1}(x, ...)
-}
-\arguments{
-\item{x}{A \code{optimal_k1} object.}
-
-\item{\ldots}{Ignored.}
+\method{plot}{optimal_k1}(x, ...)
 }
 \description{
 Plots a plot.optimal_k1 object

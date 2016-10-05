@@ -1,10 +1,10 @@
 ---
-title: "Reading and Topic modelling enhanced weathering"
+title: "Topic Modelling with Scimetrix"
 author: "Max"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Topic Modelling with Scimetrix}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -88,9 +88,9 @@ optimal_k <- function(x, max.k = 30, harmonic.mean = TRUE,
 #'
 #' Plots a plot.optimal_k1 object
 #'
-#' @param x A \code{optimal_k1} object.
-#' @param \ldots Ignored.
-#' @method plot plot.optimal_k1
+# @param x A \code{optimal_k1} object.
+# @param \ldots Ignored.
+# @method plot plot.optimal_k1
 #' @export
 plot.optimal_k1 <- function(x, ...){
 
@@ -228,13 +228,13 @@ time2char <- function(x){
     gsub("^0+", "", x)
 }
 
-#' Plots a plot.optimal_k2 Object
-#'
-#' Plots a plot.optimal_k2 object
-#'
-#' @param x A \code{optimal_k2} object.
-#' @param \ldots Ignored.
-#' @method plot plot.optimal_k2
+# Plots a plot.optimal_k2 Object
+#
+# Plots a plot.optimal_k2 object
+#
+# @param x A \code{optimal_k2} object.
+# @param \ldots Ignored.
+# @method plot plot.optimal_k2
 #' @export
 plot.optimal_k2 <- function(x, ...){
 
