@@ -63,7 +63,7 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
       )
   }
   p <- p +
-    scale_fill_brewer(palette="Set3",guide=guide_legend(reverse=T),name="Subject Area") +
+    scale_fill_brewer(palette="Set3",guide=guide_legend(reverse=T)) +
     theme_classic(base_size = bSize) +
     theme(
       panel.grid.major.y=element_line(size=0.2,colour="grey22"),
@@ -71,7 +71,7 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
       legend.position=c(0.01,0.99),
       legend.justification=c(0,1)
     ) +
-    labs(x="Year",y="Number of Publications")
+    labs(x="Year",y="Number of Publications",fill="Subject Area")
 
   print(p)
 
