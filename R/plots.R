@@ -180,3 +180,33 @@ paperShares <- function(df,field,n="all",pType="bar",bSize=12) {
   }
   return(shares)
 }
+
+
+#####################################################################
+#' Calculate and plot keyword sums
+#'
+#' @param df a dataframe of papers
+#' @param n the number of kewords to display (defaults to 100)
+#' @param bSize set the base size of the text
+#' @return A dataframe of the summed results
+#' @export
+#' @import dplyr
+#' @import ggplot2
+#' @import tidyr
+#'
+sumKeywords <- function(df,n=100,bSize=12) {
+  keywords <- data.frame(keyword = unlist(lapply(df$ID,strsplit,";"))) %>%
+    group_by(keyword) %>%
+    summarise(n=length(keyword)) %>%
+    filter(!is.na(keyword)) %>%
+    arrange(-n) %>%
+    head(n)
+  keywords$keyword = factor(keywords$keyword,levels=rev(keywords$keyword))
+  ggplot(keywords) +
+    geom_bar(
+      aes(keyword,n),
+      stat="identity"
+    ) +
+    coord_flip() +
+    theme_bw()
+}
