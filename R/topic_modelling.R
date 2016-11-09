@@ -94,9 +94,13 @@ refresh_corp <- function(dtm) {
 #' @param dtm a document term matrix
 #' @export
 visualise <- function(model,corpus,dtm) {
+  username <- strsplit(strsplit(cwd,"/home/")[[1]][2],"/")[[1]][1]
   json <- topicmodels_json_ldavis(model,corpus,dtm)
   modelName <- deparse(substitute(model))
   unlink(modelName, recursive=TRUE)
   serVis(json, out.dir = modelName, open.browser = F)
   save(model,file=paste0(modelName,"/model_output.RData"))
+  path <- paste0('/var/www/html/',username,'/',modelName)
+  unlink(path,recursive=TRUE)
+  serVis(json, out.dir = modelName, open.browser = F)
 }
