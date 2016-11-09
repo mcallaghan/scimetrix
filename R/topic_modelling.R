@@ -94,6 +94,7 @@ refresh_corp <- function(dtm) {
 #' @param dtm a document term matrix
 #' @export
 visualise <- function(model,corpus,dtm) {
+  cwd <- getwd()
   username <- strsplit(strsplit(cwd,"/home/")[[1]][2],"/")[[1]][1]
   json <- topicmodels_json_ldavis(model,corpus,dtm)
   modelName <- deparse(substitute(model))
