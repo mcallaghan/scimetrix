@@ -100,7 +100,9 @@ visualise <- function(model,corpus,dtm) {
   unlink(modelName, recursive=TRUE)
   serVis(json, out.dir = modelName, open.browser = F)
   save(model,file=paste0(modelName,"/model_output.RData"))
-  path <- paste0('/var/www/html/',username,'/',modelName)
+  dir <- paste0('/var/www/html/',username,'/')
+  dir.create(dir,showWarnings = F)
+  path <- paste0(dir,modelName)
   unlink(path,recursive=TRUE)
   serVis(json, out.dir = path, open.browser = F)
 }
