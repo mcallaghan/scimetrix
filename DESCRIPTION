@@ -16,7 +16,8 @@ Imports:
     tidyr,
     tm,
     topicmodels,
-    slam
+    slam,
+    bibliometrix
 RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown

@@ -1,4 +1,103 @@
 #####################################################################
+#' Plot a summary of the results from the bilbiometric analysis
+#'
+#' @author Jerome Hilaire
+#'
+#' @param df a dataframe of papers
+#' @export
+#' @import bibliometrix
+#' @import dplyr
+#' @import tidyr
+#' @import ggplot2
+#'
+plot_biblioAnalysis <- function(df) {
+
+  # http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
+  # Multiple plot function
+  #
+  # ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+  # - cols:   Number of columns in layout
+  # - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+  #
+  # If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+  # then plot 1 will go in the upper left, 2 will go in the upper right, and
+  # 3 will go all the way across the bottom.
+  #
+  multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+    library(grid)
+
+    # Make a list from the ... arguments and plotlist
+    plots <- c(list(...), plotlist)
+
+    numPlots = length(plots)
+
+    # If layout is NULL, then use 'cols' to determine layout
+    if (is.null(layout)) {
+      # Make the panel
+      # ncol: Number of columns of plots
+      # nrow: Number of rows needed, calculated from # of cols
+      layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                       ncol = cols, nrow = ceiling(numPlots/cols))
+    }
+
+    if (numPlots==1) {
+      print(plots[[1]])
+
+    } else {
+      # Set up the page
+      grid.newpage()
+      pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+      # Make each plot, in the correct location
+      for (i in 1:numPlots) {
+        # Get the i,j matrix positions of the regions that contain this subplot
+        matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+        print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                        layout.pos.col = matchidx$col))
+      }
+    }
+  }
+
+  tmp <- biblioAnalysis(df)
+
+  tmp_au <- as.data.frame(tmp$Authors) %>% top_n(20)
+  p_au = ggplot(data= tmp_au %>% mutate(AU=factor(AU, levels=rev(tmp_au$AU), ordered=TRUE))) +
+    geom_bar(aes(x=AU, y=Freq), stat = "identity", position = "stack", fill="blue") +
+    coord_flip()+
+    theme_bw() +
+    #theme(axis.text.x=element_text(angle=90,hjust=1)) +
+    ggtitle("Top 20 Authors") + xlab("Author") + ylab("Frequency")
+
+  tmp_so <- as.data.frame(tmp$Sources) %>% top_n(20) %>% mutate(SO=abbreviate(SO,10))
+  p_so = ggplot(data=tmp_so %>% mutate(SO=factor(SO, levels=rev(tmp_so$SO), ordered=TRUE))) +
+    geom_bar(aes(x=SO, y=Freq), stat = "identity", position = "stack", fill="blue") +
+    coord_flip()+
+    theme_bw() +
+    #theme(axis.text.x=element_text(angle=90,hjust=1)) +
+    ggtitle("Top 20 Sources") + xlab("Source") + ylab("Frequency")
+
+  p_py = ggplot(data=as.data.frame(table(tmp$Years), stringsAsFactors = FALSE) %>% mutate(Var1=as.numeric(Var1))) +
+    geom_line(aes(x=Var1, y=Freq), color="blue") +
+    theme_bw() +
+    #theme(axis.text.x=element_text(angle=90,hjust=1)) +
+    ggtitle("Number of publications per year") + xlab("Years") + ylab("Frequency")
+
+  tmp_co <- as.data.frame(tmp$Countries) %>% top_n(20)
+  p_co = ggplot(data=tmp_co %>% mutate(CO=factor(CO, levels=rev(tmp_co$CO), ordered=TRUE))) +
+    geom_bar(aes(x=CO, y=Freq), stat = "identity", position = "stack", fill="blue") +
+    coord_flip()+
+    theme_bw() +
+    #theme(axis.text.x=element_text(angle=90,hjust=1)) +
+    ggtitle("Top 20 Countries") + xlab("Country") + ylab("Frequency")
+
+  multiplot(p_au, p_so, p_py, p_co, cols = 2)
+
+  return()
+
+}
+
+#####################################################################
 #' Plot numbers of papers by variable and year
 #'
 #' @param df a dataframe of papers
