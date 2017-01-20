@@ -34,6 +34,8 @@
 #' 101(Suppl 1), 5228 - 5235. \url{http://www.pnas.org/content/101/suppl_1/5228.full.pdf}
 #' @keywords k topicmodel
 #' @export
+#' @import pacman
+#' @import Rmpfr
 #' @author Ben Marwick and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @examples
 #' ## Install/Load Tools & Data

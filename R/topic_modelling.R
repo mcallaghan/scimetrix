@@ -41,7 +41,10 @@ makeDTM <- function(corpus,sparsity,rnames,cols,rows) {
 
   row.names(dtm) <- rnames
 
-  dtm <- tm::removeSparseTerms(dtm, sparsity)
+  if (sparsity < 1) {
+    dtm <- tm::removeSparseTerms(dtm, sparsity)
+  }
+
   ## make some adjustments to the dtm
 
   print(dim(dtm))
