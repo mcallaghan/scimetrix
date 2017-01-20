@@ -93,6 +93,7 @@ refresh_corp <- function(dtm) {
 #' @param corpus a corpus
 #' @param dtm a document term matrix
 #' @export
+#' @import servr
 visualise <- function(model,corpus,dtm) {
   cwd <- getwd()
   username <- strsplit(strsplit(cwd,"/home/")[[1]][2],"/")[[1]][1]
