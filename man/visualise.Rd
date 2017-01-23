@@ -4,7 +4,7 @@
 \alias{visualise}
 \title{visualise the topic model}
 \usage{
-visualise(model, corpus, dtm)
+visualise(model, corpus, dtm, dir = F)
 }
 \arguments{
 \item{model}{a topic model}
@@ -12,6 +12,8 @@ visualise(model, corpus, dtm)
 \item{corpus}{a corpus}
 
 \item{dtm}{a document term matrix}
+
+\item{dir}{(optional - defaults to model name) a directory to save the results}
 }
 \description{
 visualise the topic model

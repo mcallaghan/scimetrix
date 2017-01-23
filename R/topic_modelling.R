@@ -95,13 +95,18 @@ refresh_corp <- function(dtm) {
 #' @param model a topic model
 #' @param corpus a corpus
 #' @param dtm a document term matrix
+#' @param dir (optional - defaults to model name) a directory to save the results
 #' @export
 #' @import servr
-visualise <- function(model,corpus,dtm) {
+visualise <- function(model,corpus,dtm,dir=F) {
   cwd <- getwd()
   username <- strsplit(strsplit(cwd,"/home/")[[1]][2],"/")[[1]][1]
   json <- topicmodels_json_ldavis(model,corpus,dtm)
-  modelName <- deparse(substitute(model))
+  if (dir==F) {
+    modelName <- deparse(substitute(model))
+  } else {
+    modelName <- dir
+  }
   unlink(modelName, recursive=TRUE)
   serVis(json, out.dir = modelName, open.browser = F)
   save(model,file=paste0(modelName,"/model_output.RData"))
