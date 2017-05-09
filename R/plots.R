@@ -170,7 +170,6 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
       legend.position=c(0.01,0.99),
       legend.justification=c(0,1)
     ) +
-    guide_legend(reverse=T) +
     labs(x="Year",y="Number of Publications",fill="Subject Area")
 
   print(p)
