@@ -162,7 +162,7 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
       )
   }
   p <- p +
-    scale_fill_brewer(palette="Set3",guide=guide_legend(reverse=T)) +
+    scale_fill_brewer(palette="Set3",guide=guide_legend(reverse=F)) +
     theme_classic(base_size = bSize) +
     theme(
       panel.grid.major.y=element_line(size=0.2,colour="grey22"),
@@ -170,6 +170,7 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
       legend.position=c(0.01,0.99),
       legend.justification=c(0,1)
     ) +
+    guide_legend(reverse=T) +
     labs(x="Year",y="Number of Publications",fill="Subject Area")
 
   print(p)
@@ -204,7 +205,7 @@ paperNumbers <- function(df,field,n="all",summed=F,graph=F,bSize=12) {
 #' @import ggplot2
 #' @import tidyr
 #'
-paperShares <- function(df,field,n="all",pType="bar",bSize=12) {
+paperShares <- function(df,field,n="all",pType="bar",bSize=12,graph=T) {
   df[,"z"] <- df[,field]
 
   rankings <- df %>%
@@ -274,8 +275,13 @@ paperShares <- function(df,field,n="all",pType="bar",bSize=12) {
 
   if(pType=="bar") {
     print(bp)
+    p <- bp
   } else {
     print(lp)
+    p <- lp
+  }
+  if (graph==T) {
+    return(p)
   }
   return(shares)
 }

@@ -4,7 +4,7 @@
 \alias{paperShares}
 \title{Plot shares of papers by variable and year}
 \usage{
-paperShares(df, field, n = "all", pType = "bar", bSize = 12)
+paperShares(df, field, n = "all", pType = "bar", bSize = 12, graph = T)
 }
 \arguments{
 \item{df}{a dataframe of papers}
@@ -23,4 +23,3 @@ A dataframe of the summed results
 \description{
 Plot shares of papers by variable and year
 }
-

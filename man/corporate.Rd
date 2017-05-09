@@ -15,4 +15,3 @@ A corpus of words, punct removed and stemmed
 \description{
 Turn a dataframe of papers into a corpus
 }
-

@@ -25,4 +25,3 @@ Either a data frame of year and category sums, or a graph object
 \description{
 Plot numbers of papers by variable and year
 }
-
