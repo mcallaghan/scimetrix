@@ -19,4 +19,3 @@ A dataframe of the summed results
 \description{
 Calculate and plot keyword sums
 }
-

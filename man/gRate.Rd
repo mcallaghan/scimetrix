@@ -23,4 +23,3 @@ A table of growth rates by field
 \description{
 Apply OECD categories to web of science subject area
 }
-

@@ -11,7 +11,7 @@ corporate <- function(df,col="AB") {
   ignoreWords <- c("the","however","this","and")
 
   corpus <- tm::Corpus(tm::VectorSource(df[[col]])) %>%
-    tm::tm_map(tm::PlainTextDocument) %>%
+    #tm::tm_map(tm::PlainTextDocument) %>%
     tm::tm_map(tm::removePunctuation) %>%
     tm::tm_map(tm::removeWords,tm::stopwords()) %>%
     #tm_map(removeNumbers(lazy=TRUE)) %>%
@@ -121,13 +121,14 @@ visualise <- function(model,corpus,dtm,dir=F) {
 #' Produce a topic correlation graph file
 #'
 #' @param model a topic model
-#' @param corpus a corpus
-#' @param dtm a document term matrix
+#' @param topic_names a character vector of topic names
 #' @export
 #' @import igraph
-topCors <- function(model) {
+topCors <- function(model, topic_names = FALSE) {
   gamma <- as.data.frame(model@gamma)
-  topic_names <- paste0("{",terms(model,10)[1,],", ",terms(model,10)[2,],", ",terms(model,10)[3,],"}")
+  if (topic_names==FALSE) {
+    topic_names <- paste0("{",terms(model,10)[1,],", ",terms(model,10)[2,],", ",terms(model,10)[3,],"}")
+  }
 
   names(gamma) <- topic_names
   cors <- cor(gamma[,])

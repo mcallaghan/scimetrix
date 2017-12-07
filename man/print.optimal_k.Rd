@@ -14,4 +14,3 @@
 \description{
 Prints a optimal_k object
 }
-

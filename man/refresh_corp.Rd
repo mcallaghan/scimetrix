@@ -15,4 +15,3 @@ A corpus of words that reflect the terms in the dtm
 \description{
 Make sure the corpus reflects the dtm after working on it
 }
-

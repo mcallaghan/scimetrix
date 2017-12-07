@@ -9,4 +9,3 @@
 \description{
 Plots a plot.optimal_k1 object
 }
-

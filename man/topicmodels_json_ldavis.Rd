@@ -16,4 +16,3 @@ topicmodels_json_ldavis(fitted, corpus, doc_term)
 \description{
 Output topic model results in json format
 }
-

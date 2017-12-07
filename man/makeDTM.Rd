@@ -19,4 +19,3 @@ A corpus of words, punct removed and stemmed
 \description{
 Turn a corpus into a document term matrix
 }
-

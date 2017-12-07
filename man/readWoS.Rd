@@ -15,4 +15,3 @@ A dataframe of WoS records
 \description{
 Read data from Web of Science (WoS)
 }
-

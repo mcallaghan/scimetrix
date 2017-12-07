@@ -4,16 +4,13 @@
 \alias{topCors}
 \title{Produce a topic correlation graph file}
 \usage{
-topCors(model)
+topCors(model, topic_names = FALSE)
 }
 \arguments{
 \item{model}{a topic model}
 
-\item{corpus}{a corpus}
-
-\item{dtm}{a document term matrix}
+\item{topic_names}{a character vector of topic names}
 }
 \description{
 Produce a topic correlation graph file
 }
-

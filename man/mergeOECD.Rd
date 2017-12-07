@@ -15,4 +15,3 @@ A dataframe of WoS records with OECD fields
 \description{
 Apply OECD categories to web of science subject area
 }
-

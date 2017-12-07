@@ -15,4 +15,3 @@ Plot a summary of the results from the bilbiometric analysis
 \author{
 Jerome Hilaire
 }
-

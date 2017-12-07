@@ -18,4 +18,3 @@ visualise(model, corpus, dtm, dir = F)
 \description{
 visualise the topic model
 }
-

@@ -81,9 +81,6 @@ opti_k1
 opti_k2 <- optimal_k(doc_term_mat, harmonic.mean = FALSE)
 opti_k2
 }
-\author{
-Ben Marwick and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 \url{http://stackoverflow.com/a/21394092/1000343} \cr
 \url{http://stats.stackexchange.com/a/25128/7482} \cr
@@ -94,6 +91,8 @@ Griffiths, T.L., and Steyvers, M. (2004). Finding scientific topics.
 Proceedings of the National Academy of Sciences of the United States of America
 101(Suppl 1), 5228 - 5235. \url{http://www.pnas.org/content/101/suppl_1/5228.full.pdf}
 }
+\author{
+Ben Marwick and Tyler Rinker <tyler.rinker@gmail.com>.
+}
 \keyword{k}
 \keyword{topicmodel}
-
